@@ -39,12 +39,27 @@ export default {
         align-items: center;
         justify-content: space-between;
         z-index: 99999;
+        @media screen and (max-width:1400px){
+            padding:0 150px;
+        }
+        @media screen and (max-width:940px){
+            padding:0 60px;
+        }
+        @media screen and (max-width:550px){
+            padding:0 35px;
+        }
+        @media screen and (max-width:320px){
+            padding:0 20px;
+        }
         >a#logo{
             color:#333;
             font-weight: 900;
             font-size: 28px;
             font-style:italic; 
             font-family: 'cwTeXYen', sans-serif;
+            @media screen and (max-width:550px){
+                font-size: 20px;
+            }
         }
         >i#menu{
             font-size: 28px;
