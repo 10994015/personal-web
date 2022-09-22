@@ -20,13 +20,16 @@ export default {
 }
 </script>
 <template>
-  <header id="header">
+  <header id="header" :class="{darken:props.isopen}">
       <a href="javascript:;" id="logo">LiChengYan</a>
       <i class="fas fa-bars" id="menu" @click="props.handMenuOpen"></i>
   </header>
 </template>
 
 <style lang="scss" scoped>
+$mainColor:#2b4749;
+$mainColor:#FE8696;
+$mainColor:#02377B;
     header#header{
         position: fixed;
         top: 0;
@@ -39,6 +42,11 @@ export default {
         align-items: center;
         justify-content: space-between;
         z-index: 99999;
+        transition: .5s;
+         &.darken{
+            -webkit-filter:brightness(.5);
+            transition: .5s;
+        }
         @media screen and (max-width:1400px){
             padding:0 150px;
         }
@@ -52,7 +60,7 @@ export default {
             padding:0 20px;
         }
         >a#logo{
-            color:#333;
+            color:$mainColor;
             font-weight: 900;
             font-size: 28px;
             font-style:italic; 
@@ -63,6 +71,7 @@ export default {
         }
         >i#menu{
             font-size: 28px;
+            color:$mainColor;
             cursor: pointer;
         }
     }

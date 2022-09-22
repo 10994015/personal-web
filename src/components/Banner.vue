@@ -14,25 +14,32 @@ export default {
                 timerNum.value = 1;
             }
         },1000)
-        return {view};
+        const downFn = ()=>{
+            document.body.scrollTop = 730;
+            document.documentElement.scrollTop = 730;
+        }
+        return {view, downFn};
     }
 }
 </script>
 <template>
   <div id="banner">
       <img src="@/assets/images/about.jpg" v-show="view" class="bannerImg">
-      <img src="@/assets/images/about2.jpg" v-show="!view" class="bannerImg">
+      <img src="@/assets/images/about6.jpg" v-show="!view" class="bannerImg">
       <div class="text open">
           <h2>Li-Cheng Yan</h2>
           <p>I come from Taoyuan</p>
-          <a href="javascript:;">SEE MORE</a>
+          <!-- <a href="javascript:;">SEE MORE</a> -->
+          <i class="fa-sharp fa-solid fa-chevron-down" id="seemore" @click="downFn"></i>
       </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
     
-   
+   $mainColor:#518084;
+   $mainColor:#FE8696;
+   $mainColor:#02377B;
     #banner{
         width:100%;
         height: 100vh;
@@ -100,6 +107,8 @@ export default {
                 font-size: 70px;
                 font-weight: 900;
                 font-family: sans-serif;
+                color:#01214b;
+                text-shadow: 0.05em 0.05em 0.05em #999;
                  @media screen and (max-width:600px){
                      font-size: 50px;
                  }
@@ -111,9 +120,9 @@ export default {
                  }
             }
             >p{
-                font-size: 30px;
+                font-size: 26px;
                 color:#777;
-                margin:10px 0;
+                margin:10px 0 50px;
                  @media screen and (max-width:1200px){
                      color:#000;
                  }
@@ -128,21 +137,44 @@ export default {
                 display: block;
                 text-align: center;
                 line-height:56px ;
-                border:2px #FE8696 solid;
+                border:2px $mainColor solid;
                 border-radius: 30px;
                 font-size: 18px;
                 width:180px;
                 height: 60px;
                 font-weight: 600;
-                color:#FE8696;
+                color:$mainColor;
                 transition: .3s;
                 margin-top: 30px;
                 &:hover{
-                    background-color: #FE8696;
+                    background-color: $mainColor;
                     color:#fff;
                     transition: .3s;
                 }
 
+            }
+            >i#seemore{
+                // text-align: center;
+                // margin:0 auto;
+                font-size: 75px;
+                color:#02377B;
+                animation: downAnim 1.5s linear infinite ;
+                background-color: transparent;
+                cursor: pointer;
+                @keyframes downAnim {
+                    0%{
+                        opacity: .1;
+                        transform: translateY(0);
+                    }
+                    100%{
+                        opacity: 1;
+                        transform: translateY(50px);
+                    }
+                }
+                @media screen and (max-width:500px){
+                    text-align: center;
+                    margin:0 auto;
+                }
             }
         }
     }

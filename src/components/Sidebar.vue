@@ -12,31 +12,89 @@ export default {
         }
     },
     setup(props){
-        
-        return {props};
+        //0,730,1420,2670,3408,4132
+        //0,500,1200,2300,3200,3900 
+        const home = ref(true);
+        const about = ref(false);
+        const work = ref(false);
+        const skills = ref(false);
+        const awards = ref(false);
+        const contact = ref(false);
+        window.addEventListener('scroll',()=>{
+            if(window.scrollY < 500){
+                home.value = true;
+                about.value = false;
+                work.value = false;
+                skills.value = false;
+                awards.value = false;
+                contact.value = false;
+            }else if(window.scrollY >= 500 && window.scrollY < 1200){
+                home.value = false;
+                about.value = true;
+                work.value = false;
+                skills.value = false;
+                awards.value = false;
+                contact.value = false;
+            }else if(window.scrollY >= 1200 && window.scrollY < 2300){
+                home.value = false;
+                about.value = false;
+                work.value = true;
+                skills.value = false;
+                awards.value = false;
+                contact.value = false;
+            }else if(window.scrollY >= 2300 && window.scrollY < 3200){
+                home.value = false;
+                about.value = false;
+                work.value = false;
+                skills.value = true;
+                awards.value = false;
+                contact.value = false;
+            }else if(window.scrollY >= 3200 && window.scrollY < 3900){
+                home.value = false;
+                about.value = false;
+                work.value = false;
+                skills.value = false;
+                awards.value = true;
+                contact.value = false;
+            }else if(window.scrollY >= 3900 ){
+                home.value = false;
+                about.value = false;
+                work.value = false;
+                skills.value = false;
+                awards.value = false;
+                contact.value = true;
+            }
+        })
+        const scrollFn = (h)=>{
+            document.body.scrollTop = h;
+            document.documentElement.scrollTop = h;
+        }
+        return {props, home, about, work, skills, awards, contact, scrollFn};
     }
 }
 </script>
 <template>
-  <div id="sidebar" :class="{open:props.isopen}">
-      <i class="fas fa-times" id="close" @click="props.handMenuClose"></i>
-      <ul>
-          <a href="javascript:;" class="focus">HOME</a>
-          <a href="javascript:;">ABOUT</a>
-          <a href="javascript:;">SKILLS</a>
-          <a href="javascript:;">EDUCATION</a>
-          <a href="javascript:;">WORK</a>
-          <a href="javascript:;">OTHER</a>
-          <a href="javascript:;">CONTACT</a>
-      </ul>
-  </div>
+    <div id="sidebar" :class="{open:props.isopen}">
+        <i class="fas fa-times" id="close" @click="props.handMenuClose"></i>
+        <ul>
+            <a href="javascript:;" @click="scrollFn(0)" :class="{focus:home,open:props.isopen}">HOME</a>
+            <a href="javascript:;" @click="scrollFn(730)" :class="{focus:about,open:props.isopen}">ABOUT</a>
+            <a href="javascript:;" @click="scrollFn(1420)" :class="{focus:work,open:props.isopen}">WORKS</a>
+            <a href="javascript:;" @click="scrollFn(2670)" :class="{focus:skills,open:props.isopen}">SKILLS</a>
+            <a href="javascript:;" @click="scrollFn(3408)" :class="{focus:awards,open:props.isopen}">AWARDS</a>
+            <a href="javascript:;" @click="scrollFn(4200)" :class="{focus:contact,open:props.isopen}">CONTACT</a>
+        </ul>
+    </div>
 </template>
 
 <style lang="scss" scoped>
+  $mainColor:#2b4749;
+  $mainColor:#FE8696;
+  $mainColor:#02377B;
     #sidebar{
         width:350px;
         height: 100vh;
-        z-index: 999999;
+        z-index: 9999999;
         position: fixed;
         top: 0;
         right:-350px;
@@ -45,7 +103,6 @@ export default {
         padding: 100px 50px;
         display: flex;
         flex-direction: column;
-        border-left:1px #000 solid;
         &.open{
             right:0;
             transition: .3s;
@@ -57,7 +114,7 @@ export default {
             top: 40px;
             right:40px;
             transition: .3s;
-            color:#666;
+            color:$mainColor;
             &:hover{
                 color:#aaa;
                 transition: .3s;
@@ -67,10 +124,24 @@ export default {
             list-style-type: none;
             >a{
                 display: block;
-                font-size: 21px;
+                font-size: 20px;
                 margin:30px 0;
                 &.focus{
-                    color:#f52f49;
+                    color:$mainColor;
+                    font-weight: 600;
+                }
+                &.open1{
+                    animation: openAmin calc((var(--i))*0.1)s linear;
+                    @keyframes openAmin {
+                        0%{
+                            opacity: .1;
+                            transform: translate(20px,50px);
+                        }
+                        100%{
+                            opacity: 1;
+                            transform: translate(0,0);
+                        }
+                    }
                 }
             }
         }
