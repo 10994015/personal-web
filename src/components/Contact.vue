@@ -5,7 +5,11 @@ import smtpjs from "@/assets/js/smtp.js"
 export default {
   
     setup(){
-        console.log(smtpjs);
+        // console.log(smtpjs);
+        const title = ref(null);
+        const name = ref(null);
+        const email = ref(null);
+        const content = ref(null);
         const data = reactive({
             title:"",
             name:"",
@@ -24,15 +28,23 @@ export default {
                 message => alert(message)
             )
         }
+        
         const handSubmit = ()=>{
-            // axios.post(proxy + 'https://jiousaio.com/sendMail/sendMail.php',data).then(res=>{
+            let params = new FormData();
+            params.append('title',title.value )
+            params.append('name',name.value )
+            params.append('email', email.value)
+            params.append('content', content.value)
+            // console.log('params=>', params);
+            
+            // axios.post(proxy + 'https://jiousaio.com/sendMail/sendMail.php',params).then(res=>{
             //     console.log(res);
             // })
-            sendMail ()
+            // sendMail ()
         }
        
        
-        return {data, handSubmit, };
+        return {data, handSubmit, title,name,email,content};
     },
      
 }
@@ -42,10 +54,10 @@ export default {
   <div id="contact">
         <span class="myTitle">CONTACT ME</span>
         <div class="contactForm">
-            <input type="text" placeholder="主旨" v-model="data.title">
-            <input type="text" placeholder="姓名" v-model="data.name">
-            <input type="text" placeholder="E-mail" v-model="data.email">
-            <textarea name="" id="" cols="30" rows="10" v-model="data.content" placeholder="內容..."></textarea>
+            <input type="text" placeholder="主旨" v-model="data.title" ref="title">
+            <input type="text" placeholder="姓名" v-model="data.name" ref="name">
+            <input type="text" placeholder="E-mail" v-model="data.email" ref="email">
+            <textarea name="" id="" cols="30" rows="10" v-model="data.content" ref="content" placeholder="內容..."></textarea>
             <button @click="handSubmit">送出</button>
         </div>
   </div>

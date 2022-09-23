@@ -16,6 +16,18 @@ export default {
                 content:'使用PHP架構冰芬文教後台管理系統'
             },
             {
+                url:"https://adsarousal.com/",
+                src:require('@/assets/images/ads.jpg'),
+                name:'碩士論文問卷系統',
+                content:'使用PHP製作論文用問卷系統'
+            },
+            {
+                url:"https://10994015.github.io/7zip/start.html",
+                src:require('@/assets/images/seven.jpg'),
+                name:'七大罪遊戲',
+                content:'製作七大原罪網頁小遊戲'
+            },
+            {
                 url:"https://www.evoneic.com/",
                 src:require('@/assets/images/evone.jpg'),
                 name:'憶旺智慧股份有限公司',
@@ -27,6 +39,7 @@ export default {
                 name:'臺灣碳材料學會CST',
                 content:'使用PHP架設臺灣碳材料學會前台與後台管理'
             },
+            
             {
                 url:"https://jiousaio.com/",
                 src:require('@/assets/images/jiousaio.jpg'),
@@ -40,35 +53,25 @@ export default {
                 content:'使用WordPress架設模型購物網站'
             },
             {
-                url:"https://jiousaio.com/Lecture/",
-                src:require('@/assets/images/lecture.jpg'),
-                name:'中原大學衛保組魷魚遊戲',
-                content:'與中原大學衛保組合作製作網頁小遊戲及後台管理'
-            },
-            {
                 url:"https://jiousaio.com/marvel/",
                 src:require('@/assets/images/marvel.jpg'),
                 name:'中原大學衛保組漫威遊戲',
                 content:'與中原大學衛保組合作製作網頁小遊戲及後台管理'
             },
             {
-                url:"https://10994015.github.io/7zip/",
-                src:require('@/assets/images/seven.jpg'),
-                name:'七大罪遊戲',
-                content:'製作七大原罪網頁小遊戲'
+                url:"https://jiousaio.com/Lecture/",
+                src:require('@/assets/images/lecture.jpg'),
+                name:'中原大學衛保組魷魚遊戲',
+                content:'與中原大學衛保組合作製作網頁小遊戲及後台管理'
             },
+           
             {
                 url:"https://10994015.github.io/tripleE/",
                 src:require('@/assets/images/yikang.jpg'),
                 name:'益康診所APP',
                 content:'與益康診所合作架設診所關愛APP'
             },
-            {
-                url:"https://adsarousal.com/",
-                src:require('@/assets/images/ads.jpg'),
-                name:'碩士論文問卷系統',
-                content:'使用PHP製作論文用問卷系統'
-            },
+            
             {
                 url:"https://lichengyanchala.zyrosite.com/",
                 src:require('@/assets/images/doll.jpg'),
@@ -77,28 +80,8 @@ export default {
             },
         ])
         const workItem = ref(null);
-        const num = ref(0);
-        const handAddFn = ()=>{
-            num.value ++;
-            if(num.value >2){
-                num.value = 0;
-            }
-            
-            
-            for(let i=0;i<=workItem.value.length;i++){
-                workItem.value[i].style.transform = `translateX(${num.value*-1100}px)`;
-            }
-        }
-        const handRemoveFn = ()=>{
-            num.value --;
-            if(num.value <0){
-                num.value = 2;
-            }
-            for(let i=0;i<=workItem.value.length;i++){
-                workItem.value[i].style.transform = `translateX(${num.value*-1100}px)`;
-            }
-        }
-        return {wordArr, num, handAddFn, handRemoveFn, workItem};
+
+        return {wordArr, workItem};
     }
 }
 </script>
@@ -106,8 +89,7 @@ export default {
   <div id="work">
     <span class="myTitle">MY WORK</span>
      <div class="workDiv">
-         <!-- <i class="fa-solid fa-chevron-left" id="arrow-left" @click="handRemoveFn()"></i>
-         <i class="fa-solid fa-chevron-right" id="arrow-right" @click="handAddFn()"></i> -->
+       
          <div class="workBox">
             <a :href="item.url" target="_blank" class="workItem" ref="workItem" v-for="item in wordArr" :key="item.name">
                 <img :src="item.src" alt="">

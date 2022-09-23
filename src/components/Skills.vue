@@ -25,7 +25,7 @@ export default {
             },
             {
                 name:"Vue",
-                percent:60,
+                percent:70,
             },
             {
                 name:"Python",

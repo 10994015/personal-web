@@ -68,6 +68,7 @@ export default {
         const scrollFn = (h)=>{
             document.body.scrollTop = h;
             document.documentElement.scrollTop = h;
+            props.handMenuClose();
         }
         return {props, home, about, work, skills, awards, contact, scrollFn};
     }
@@ -78,11 +79,11 @@ export default {
         <i class="fas fa-times" id="close" @click="props.handMenuClose"></i>
         <ul>
             <a href="javascript:;" @click="scrollFn(0)" :class="{focus:home,open:props.isopen}">HOME</a>
-            <a href="javascript:;" @click="scrollFn(730)" :class="{focus:about,open:props.isopen}">ABOUT</a>
-            <a href="javascript:;" @click="scrollFn(1420)" :class="{focus:work,open:props.isopen}">WORKS</a>
-            <a href="javascript:;" @click="scrollFn(2670)" :class="{focus:skills,open:props.isopen}">SKILLS</a>
-            <a href="javascript:;" @click="scrollFn(3408)" :class="{focus:awards,open:props.isopen}">AWARDS</a>
-            <a href="javascript:;" @click="scrollFn(4200)" :class="{focus:contact,open:props.isopen}">CONTACT</a>
+            <a href="./#about" @click="props.handMenuClose" :class="{focus:about,open:props.isopen}">ABOUT</a>
+            <a href="./#work"  @click="props.handMenuClose" :class="{focus:work,open:props.isopen}">WORKS</a>
+            <a href="./#skills" @click="props.handMenuClose" :class="{focus:skills,open:props.isopen}">SKILLS</a>
+            <a href="./#awards" @click="props.handMenuClose" :class="{focus:awards,open:props.isopen}">AWARDS</a>
+            <a href="./#contact" @click="props.handMenuClose" :class="{focus:contact,open:props.isopen}">CONTACT</a>
         </ul>
     </div>
 </template>
@@ -94,7 +95,7 @@ export default {
     #sidebar{
         width:350px;
         height: 100vh;
-        z-index: 9999999;
+        z-index: 999999999999999999999999999999999;
         position: fixed;
         top: 0;
         right:-350px;
@@ -127,8 +128,8 @@ export default {
                 font-size: 20px;
                 margin:30px 0;
                 &.focus{
-                    color:$mainColor;
-                    font-weight: 600;
+                    // color:$mainColor;
+                    // font-weight: 600;
                 }
                 &.open1{
                     animation: openAmin calc((var(--i))*0.1)s linear;

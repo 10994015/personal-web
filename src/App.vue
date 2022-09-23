@@ -1,5 +1,5 @@
 <script>
-import { ref} from "vue";
+import { ref, onMounted} from "vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Header from "@/components/Header.vue";
 import Banner from "@/components/Banner.vue";
@@ -43,7 +43,8 @@ export default {
       isModule.value = false;
       isModuleSrc.value = "";
     }
-    return {isOpen, handMenuOpen, handMenuClose, isModule, handOpenModule, handCloseModule, isModuleSrc};
+    
+    return {isOpen, handMenuOpen, handMenuClose, isModule, handOpenModule, handCloseModule, isModuleSrc, };
   }
 }
 </script>
@@ -51,11 +52,11 @@ export default {
   <Sidebar :isopen="isOpen" :handMenuClose="handMenuClose" />
   <Header :isopen="isOpen" :handMenuOpen="handMenuOpen" />
   <div id="main" :class="{darken:isOpen}">
-      <Banner />
+      <Banner  />
       <About />
-      <Work />
+      <Work  />
       <Skills />
-      <Awards :isModule="isModule" :handOpenModule="handOpenModule" />
+      <Awards  :isModule="isModule" :handOpenModule="handOpenModule" />
       <Contact />
       <Footer /> 
       <Module :isModule="isModule" :handCloseModule="handCloseModule" :isModuleSrc="isModuleSrc" />

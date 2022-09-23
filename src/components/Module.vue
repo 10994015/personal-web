@@ -31,6 +31,7 @@ export default {
 </script>
 <template>
   <div id="module" v-show="isModule">
+      <div class="back" @click="handCloseModule"></div>
       <div class="imgBox">
           <i class="fas fa-times" id="close" @click="handCloseModule"></i>
           <!-- <img :src="require('@/assets/images/awards/'+isModuleSrc)" alt=""> -->
@@ -43,10 +44,10 @@ export default {
         position: fixed;
         top: 0;
         left:0;
-        z-index: 999999;
+        z-index: 999999999999999999;
         width:100%;
         height: 100vh;
-        background-color:rgba(0,0,0,.5);
+        background-color:transparent;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -58,6 +59,14 @@ export default {
             100%{
                 opacity: 1;
             }
+        }
+        >.back{
+            position: absolute;
+            top: 0;
+            left:0;
+            width:100%;
+            height: 100vh;
+            background-color:rgba(0,0,0,.5);
         }
         >.imgBox{
             height: 85%;
