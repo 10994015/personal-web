@@ -68,6 +68,7 @@ $mainColor:#02377B;
             transform-style: preserve-3d;
             animation: animate 20s linear infinite;
             background: transparent;
+            z-index: 1;
             @media screen and (max-width:700px){
                 width:150px;
             }

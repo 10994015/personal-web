@@ -41,8 +41,10 @@ $mainColor:#02377B;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        z-index: 999999999;
+        z-index: 9999999;
         transition: .5s;
+        transform-style: preserve-3d;
+        transform: perspective(0 ) rotateY(0);
          &.darken{
             -webkit-filter:brightness(.5);
             transition: .5s;

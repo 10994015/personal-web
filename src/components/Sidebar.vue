@@ -14,12 +14,7 @@ export default {
     setup(props){
         //0,730,1420,2670,3408,4132
         //0,500,1200,2300,3200,3900 
-        const home = ref(true);
-        const about = ref(false);
-        const work = ref(false);
-        const skills = ref(false);
-        const awards = ref(false);
-        const contact = ref(false);
+       
         window.addEventListener('scroll',()=>{
             if(window.scrollY < 500){
                 home.value = true;
@@ -70,7 +65,7 @@ export default {
             document.documentElement.scrollTop = h;
             props.handMenuClose();
         }
-        return {props, home, about, work, skills, awards, contact, scrollFn};
+        return {props, scrollFn};
     }
 }
 </script>
@@ -95,7 +90,7 @@ export default {
     #sidebar{
         width:350px;
         height: 100vh;
-        z-index: 999999999999999999999999999999999;
+        z-index: 9999999999999999;
         position: fixed;
         top: 0;
         right:-350px;

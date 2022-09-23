@@ -79,7 +79,7 @@ export default {
         >.text{
             position: absolute;
             background-color: transparent;
-            top: 50%;
+            top: 60%;
             left:60%;
             transform: translate(-50%,-50%);
             display: flex;
