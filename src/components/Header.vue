@@ -32,6 +32,7 @@ $mainColor:#FE8696;
 $mainColor:#02377B;
     header#header{
         position: fixed;
+        position: relative;
         top: 0;
         left:0;
         width:100%;
@@ -44,7 +45,7 @@ $mainColor:#02377B;
         z-index: 9999999;
         transition: .5s;
         transform-style: preserve-3d;
-        transform: perspective(0 ) rotateY(0);
+        transform: perspective(0 ) ;
          &.darken{
             -webkit-filter:brightness(.5);
             transition: .5s;

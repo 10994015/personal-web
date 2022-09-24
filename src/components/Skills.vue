@@ -1,5 +1,5 @@
 <script>
-import {ref, reactive} from "vue";
+import {ref, reactive, onMounted} from "vue";
 export default {
     setup(){
         const skills = reactive([
@@ -72,12 +72,25 @@ export default {
                 time:"2019-2020"
             },
         ])
-        return {skills, expriences};
+
+        const screenH = screen.height;
+        const isView = ref(false);
+        onMounted(()=>{
+            const h = document.getElementById('skills').offsetTop;
+            console.log(h);
+            
+            window.addEventListener('scroll',()=>{
+                if(window.scrollY >= (h- (screenH/2))){
+                    isView.value = true;
+                }
+            })
+        })
+        return {skills, expriences, isView};
     }
 }
 </script>
 <template>
-  <div id="skills">
+  <div id="skills" :class="{view:isView}">
       <span class="myTitle">MY expriences & SKILLS</span>
         <div class="content">
             <div class="expriences">
@@ -93,7 +106,7 @@ export default {
                 <div class="skillsItem" v-for="item in skills" :key="item.name">
                     <div class="title"><p class="name">{{item.name}}</p><p class="percent">{{item.percent}}%</p> </div>
                     <div class="skillsBar">
-                        <div class="bar" :style="{width:item.percent + '%'}"></div> 
+                        <div :class="['bar',{view:isView}]" :style="{width:item.percent + '%'}"></div> 
                     </div>
                 </div>
             
@@ -111,6 +124,21 @@ export default {
         width:100%;
         max-width:1200px;
         margin: 0 auto;
+        opacity: 0;
+         &.view{
+            animation: viewAnim .5s;
+            opacity: 1;
+            @keyframes viewAnim {
+                0%{
+                    opacity: 0;
+                    transform: translateY(200px)
+                }
+                100%{
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
         >.myTitle{
             color:$mainColor;
             font-weight: 700;
@@ -203,7 +231,9 @@ export default {
                             height: 13px;
                             background-image: linear-gradient(to right,rgb(73, 121, 184),#02377B);
                             // border-radius: 15px;
-                            animation: run 1.5s ;
+                            &.view{
+                                animation: run 1.5s ;
+                            }
                             @keyframes run {
                                 0%{
                                     width:0%;

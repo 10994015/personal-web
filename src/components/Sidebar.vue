@@ -1,5 +1,5 @@
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 export default {
     props:{
         isopen:{
@@ -15,70 +15,24 @@ export default {
         //0,730,1420,2670,3408,4132
         //0,500,1200,2300,3200,3900 
        
-        window.addEventListener('scroll',()=>{
-            if(window.scrollY < 500){
-                home.value = true;
-                about.value = false;
-                work.value = false;
-                skills.value = false;
-                awards.value = false;
-                contact.value = false;
-            }else if(window.scrollY >= 500 && window.scrollY < 1200){
-                home.value = false;
-                about.value = true;
-                work.value = false;
-                skills.value = false;
-                awards.value = false;
-                contact.value = false;
-            }else if(window.scrollY >= 1200 && window.scrollY < 2300){
-                home.value = false;
-                about.value = false;
-                work.value = true;
-                skills.value = false;
-                awards.value = false;
-                contact.value = false;
-            }else if(window.scrollY >= 2300 && window.scrollY < 3200){
-                home.value = false;
-                about.value = false;
-                work.value = false;
-                skills.value = true;
-                awards.value = false;
-                contact.value = false;
-            }else if(window.scrollY >= 3200 && window.scrollY < 3900){
-                home.value = false;
-                about.value = false;
-                work.value = false;
-                skills.value = false;
-                awards.value = true;
-                contact.value = false;
-            }else if(window.scrollY >= 3900 ){
-                home.value = false;
-                about.value = false;
-                work.value = false;
-                skills.value = false;
-                awards.value = false;
-                contact.value = true;
-            }
+        
+        const handMenuClose = computed(()=>{
+            return props.handMenuClose;
         })
-        const scrollFn = (h)=>{
-            document.body.scrollTop = h;
-            document.documentElement.scrollTop = h;
-            props.handMenuClose();
-        }
-        return {props, scrollFn};
+        return {handMenuClose,props };
     }
 }
 </script>
 <template>
     <div id="sidebar" :class="{open:props.isopen}">
-        <i class="fas fa-times" id="close" @click="props.handMenuClose"></i>
+        <i class="fas fa-times" id="close" @click="handMenuClose"></i>
         <ul>
-            <a href="javascript:;" @click="scrollFn(0)" :class="{focus:home,open:props.isopen}">HOME</a>
-            <a href="./#about" @click="props.handMenuClose" :class="{focus:about,open:props.isopen}">ABOUT</a>
-            <a href="./#work"  @click="props.handMenuClose" :class="{focus:work,open:props.isopen}">WORKS</a>
-            <a href="./#skills" @click="props.handMenuClose" :class="{focus:skills,open:props.isopen}">SKILLS</a>
-            <a href="./#awards" @click="props.handMenuClose" :class="{focus:awards,open:props.isopen}">AWARDS</a>
-            <a href="./#contact" @click="props.handMenuClose" :class="{focus:contact,open:props.isopen}">CONTACT</a>
+            <a href="./#banner" @click="handMenuClose" :class="{focus:home,open:props.isopen}">HOME</a>
+            <a href="./#about" @click="handMenuClose" :class="{focus:about,open:props.isopen}">ABOUT</a>
+            <a href="./#work"  @click="handMenuClose" :class="{focus:work,open:props.isopen}">WORKS</a>
+            <a href="./#skills" @click="handMenuClose" :class="{focus:skills,open:props.isopen}">SKILLS</a>
+            <a href="./#awards" @click="handMenuClose" :class="{focus:awards,open:props.isopen}">AWARDS</a>
+            <a href="./#contact" @click="handMenuClose" :class="{focus:contact,open:props.isopen}">CONTACT</a>
         </ul>
     </div>
 </template>

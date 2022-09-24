@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios'
-import {ref, reactive,} from "vue"
+import {ref, reactive, onMounted} from "vue"
 import smtpjs from "@/assets/js/smtp.js"
 export default {
   
@@ -42,16 +42,27 @@ export default {
             // })
             // sendMail ()
         }
+       const screenH = screen.height;
+        const isView = ref(false);
+        onMounted(()=>{
+            const h = document.getElementById('contact').offsetTop;
+            console.log(h);
+            
+            window.addEventListener('scroll',()=>{
+                if(window.scrollY >= (h- (screenH/2))){
+                    isView.value = true;
+                }
+            })
+        })
        
-       
-        return {data, handSubmit, title,name,email,content};
+        return {data, handSubmit, title,name,email,content, isView};
     },
      
 }
 
 </script>
 <template>
-  <div id="contact">
+  <div id="contact" :class="{view:isView}">
         <span class="myTitle">CONTACT ME</span>
         <div class="contactForm">
             <input type="text" placeholder="主旨" v-model="data.title" ref="title">
@@ -69,6 +80,21 @@ $mainColor:#02377B;
         margin:0 auto;
         padding: 100px 0;
         background-color: #f1f1f1;
+        opacity: 0;
+        &.view{
+            animation: viewAnim .5s;
+            opacity: 1;
+            @keyframes viewAnim {
+                0%{
+                    opacity: 0;
+                    transform: translateY(200px)
+                }
+                100%{
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
          >.myTitle{
             color:$mainColor;
             font-weight: 700;

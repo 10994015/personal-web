@@ -1,16 +1,31 @@
 <script>
-import {ref} from "vue";
+import {ref, onMounted, computed} from "vue";
 export default {
-    setup(){
+    props:{
+      
+    },
+    setup(props){
+        const screenH = screen.height;
+        const isView = ref(false);
+        onMounted(()=>{
+            const h = document.getElementById('about').offsetTop;
+            console.log(h);
+            
+            window.addEventListener('scroll',()=>{
+                if(window.scrollY >= (h- (screenH/2))){
+                    isView.value = true;
+                }
+            })
+        })
         
-        return {};
+        return {isView};
     }
 }
 </script>
 <template>
 
 
-  <div id="about">
+  <div id="about" :class="{view:isView}">
       <div class="imgBox">
           <img src="@/assets/images/about5.jpg" class="aboutImg">
       </div>
@@ -50,7 +65,7 @@ export default {
                  </svg>
               </a>
           </div>
-          <a href="../assets/pdf/li.pdf" download class="downloadCV">Download CV</a>
+          <!-- <a href="../assets/pdf/li.pdf" download class="downloadCV">Download CV</a> -->
 
       </div>
   </div>
@@ -67,6 +82,22 @@ export default {
         justify-content: center;
         margin: 0 auto;
         align-items: center;
+        transition: .5s;
+        opacity: 0;
+        &.view{
+            animation: viewAnim .5s;
+            opacity: 1;
+            @keyframes viewAnim {
+                0%{
+                    opacity: 0;
+                    transform: translateY(200px)
+                }
+                100%{
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
         @media screen and (max-width:975px){
             flex-direction: column;
         }

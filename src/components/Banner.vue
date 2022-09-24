@@ -1,9 +1,10 @@
 <script>
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 export default {
     setup(){
         const view = ref(false);
         const timerNum = ref(1);
+        const bannerDiv = ref(null)
         setInterval(()=>{
             timerNum.value++;
             
@@ -14,16 +15,18 @@ export default {
                 timerNum.value = 1;
             }
         },1000)
+        
+        
         const downFn = ()=>{
-            document.body.scrollTop = 730;
-            document.documentElement.scrollTop = 730;
+            document.body.scrollTop = 844;
+            document.documentElement.scrollTop = 844;
         }
-        return {view, downFn};
+        return {view, downFn, bannerDiv};
     }
 }
 </script>
 <template>
-  <div id="banner">
+  <div id="banner" ref="bannerDiv">
       <img src="@/assets/images/about.jpg" v-show="view" class="bannerImg">
       <img src="@/assets/images/about6.jpg" v-show="!view" class="bannerImg">
       <div class="text open">

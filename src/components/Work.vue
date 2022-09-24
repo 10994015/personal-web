@@ -1,6 +1,9 @@
 <script>
-import {reactive, ref} from "vue";
+import {reactive, ref,onMounted } from "vue";
 export default {
+    props:{
+       
+    },
     setup(){
         const wordArr = reactive([
             {
@@ -80,13 +83,27 @@ export default {
             },
         ])
         const workItem = ref(null);
-
-        return {wordArr, workItem};
+        
+        const screenH = screen.height;
+        const isView = ref(false);
+        onMounted(()=>{
+            const h = document.getElementById('work').offsetTop;
+            console.log(h);
+            
+            window.addEventListener('scroll',()=>{
+                if(window.scrollY >= (h- (screenH/2))){
+                    isView.value = true;
+                }
+            })
+        })
+       
+        
+        return {wordArr, workItem, isView };
     }
 }
 </script>
 <template>
-  <div id="work">
+  <div id="work" :class="{view:isView}">
     <span class="myTitle">MY WORK</span>
      <div class="workDiv">
        
@@ -109,9 +126,22 @@ $mainColor:#213558;
         // background-image: linear-gradient(to bottom,#FFB896,#FE8696,#FFB896,#FE8696);
         // background-image: url('~@/assets/images/bg2.jpg');
         background-image: radial-gradient(circle at center,#008081,#142D6A);
-
-        
+        opacity: 0;
         // background-color: #213558;
+         &.view{
+            animation: viewAnim .5s;
+            opacity: 1;
+            @keyframes viewAnim {
+                0%{
+                    opacity: 0;
+                    transform: translateY(200px)
+                }
+                100%{
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
         >.myTitle{
             color:#fff;
             font-weight: 700;

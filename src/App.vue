@@ -92,6 +92,7 @@ export default {
   }
   #main{
     transition: .5s;
+    z-index: 999;
     &.darken{
       -webkit-filter:brightness(.5);
       transition: .5s;
